@@ -1,0 +1,12 @@
+name = 'FoxTrope'
+license = 'MIT'
+licenselink = 'https://opensource.org/license/mit'
+description = 'Tema Hugo escuro, editorial e orientado a desempenho para o FoxTechWorld.'
+homepage = 'https://github.com/FoxTechWorld/FoxTrope'
+tags = ['blog', 'dark', 'editorial', 'accessible', 'responsive']
+features = ['responsive', 'seo', 'rss', 'syntax highlighting', 'disqus']
+min_version = '0.146.0'
+
+[author]
+  name = 'FoxTechWorld'
+  homepage = 'https://foxtechworld.com/'

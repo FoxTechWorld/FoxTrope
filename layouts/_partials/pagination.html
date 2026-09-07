@@ -1,0 +1,11 @@
+{{- with .Paginator }}
+  {{- if gt .TotalPages 1 }}
+    <nav class="pagination" aria-label="Paginação">
+      <span>{{ .PageNumber }} de {{ .TotalPages }}</span>
+      <div class="flex gap-3">
+        {{ with .Prev }}<a class="pagination__link" href="{{ .URL }}" rel="prev">Anterior</a>{{ end }}
+        {{ with .Next }}<a class="pagination__link" href="{{ .URL }}" rel="next">Próxima</a>{{ end }}
+      </div>
+    </nav>
+  {{- end }}
+{{- end }}

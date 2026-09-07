@@ -1,0 +1,30 @@
+<footer class="site-footer">
+  <div class="site-shell site-footer__inner">
+    <div>
+      <p><strong>{{ site.Title }}</strong></p>
+      {{ with site.Params.footer }}<p>{{ . }}</p>{{ end }}
+      <p>&copy; {{ now.Year }} {{ site.Params.author | default site.Title }}.</p>
+    </div>
+    {{ $privacy := site.GetPage "/privacy" }}
+    {{ $about := site.GetPage "/about" }}
+    {{ $rss := site.Home.OutputFormats.Get "RSS" }}
+    {{ if or $privacy $about $rss }}
+      <ul class="site-footer__links" aria-label="Links do rodapé">
+        {{ with $about }}<li><a href="{{ .RelPermalink }}">Sobre</a></li>{{ end }}
+        {{ with $privacy }}<li><a href="{{ .RelPermalink }}">Privacidade</a></li>{{ end }}
+        {{ with $rss }}
+          <li>
+            <a class="site-footer__rss" href="{{ .Permalink }}">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 11a9 9 0 0 1 9 9" />
+                <path d="M4 4a16 16 0 0 1 16 16" />
+                <circle cx="5" cy="19" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              <span>RSS</span>
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</footer>

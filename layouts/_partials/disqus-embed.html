@@ -1,0 +1,16 @@
+{{- $page := .page -}}
+{{- $shortname := site.Params.disqus.shortname | default "" -}}
+{{- if $shortname }}
+  <section
+    class="comments"
+    aria-labelledby="comments-title"
+    x-data="comments({{ $shortname | jsonify }}, {{ $page.Permalink | jsonify }}, {{ $page.File.UniqueID | jsonify }}, {{ $page.Title | jsonify }})">
+    <h2 id="comments-title" class="comments__title">Comentários</h2>
+    <div x-show="!loaded">
+      <p class="comments__notice">Os comentários são fornecidos pelo Disqus, um serviço externo que pode usar cookies e coletar dados técnicos.</p>
+      <button class="button mt-4" type="button" @click="load">Carregar comentários</button>
+    </div>
+    <div id="disqus_thread" x-show="loaded" x-cloak></div>
+    <noscript><p class="comments__notice">Ative o JavaScript para visualizar os comentários fornecidos pelo Disqus.</p></noscript>
+  </section>
+{{- end }}

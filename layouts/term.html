@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <div class="subpage">
+    <header class="page-header">
+      <p class="eyebrow">{{ .Data.Singular | title }}</p>
+      <h1 class="display-title">{{ .Title }}</h1>
+      {{ with .Content }}<div class="page-description">{{ . }}</div>{{ end }}
+    </header>
+    {{ $paginator := .Paginate .RegularPages.ByDate.Reverse }}
+    <ol class="post-list">
+      {{ range $paginator.Pages }}<li class="post-list__item">{{ partial "post-card.html" . }}</li>{{ end }}
+    </ol>
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}

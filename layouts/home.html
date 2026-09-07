@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div class="home-page">
+    {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+    {{ if $pages }}
+      <section aria-labelledby="recent-posts">
+        <h1 id="recent-posts" class="display-title mb-8">Artigos recentes</h1>
+        <ol class="post-list">
+          {{ range first 3 $pages.ByDate.Reverse }}
+            <li class="post-list__item">{{ partial "post-card.html" . }}</li>
+          {{ end }}
+        </ol>
+      </section>
+    {{ else }}
+      <p>Nenhum artigo publicado ainda.</p>
+    {{ end }}
+  </div>
+{{ end }}

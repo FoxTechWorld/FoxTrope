@@ -1,0 +1,19 @@
+{{- $page := .page -}}
+{{- with index site.Menus .menuID }}
+  <nav
+    id="primary-navigation"
+    class="site-nav"
+    :class="{ 'site-nav--open': open }"
+    aria-label="Navegação principal">
+    <ul class="site-nav__list">
+      {{- range . }}
+        {{- $current := or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) -}}
+        <li>
+          <a class="site-nav__link" href="{{ .URL }}" @click="open = false"{{ if $current }} aria-current="{{ if $page.IsMenuCurrent .Menu . }}page{{ else }}true{{ end }}"{{ end }}>
+            {{ .Name }}
+          </a>
+        </li>
+      {{- end }}
+    </ul>
+  </nav>
+{{- end }}

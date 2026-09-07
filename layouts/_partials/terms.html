@@ -1,0 +1,9 @@
+{{- with .page.GetTerms .taxonomy }}
+  <nav class="terms" aria-label="{{ (index . 0).Parent.LinkTitle }}">
+    <ul class="terms__list">
+      {{- range . }}
+        <li><a class="terms__link" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+      {{- end }}
+    </ul>
+  </nav>
+{{- end }}

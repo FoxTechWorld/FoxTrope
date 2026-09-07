@@ -1,0 +1,6 @@
+{{- $shortname := site.Params.disqus.shortname | default "" -}}
+{{- if $shortname -}}
+  {{- partial "disqus-embed.html" (dict "page" .Page) -}}
+{{- else -}}
+  {{- warnf "shortcode disqus: configure site.Params.disqus.shortname para habilitar os comentários (%s)" .Page.File.Filename -}}
+{{- end -}}

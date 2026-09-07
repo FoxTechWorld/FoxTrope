@@ -1,0 +1,24 @@
+{{- $src := .Destination -}}
+{{- $image := .Page.Resources.GetMatch $src -}}
+{{- $isLead := not (.Page.Store.Get "foxtropeImageSeen") -}}
+{{- if $isLead -}}{{- .Page.Store.Set "foxtropeImageSeen" true -}}{{- end -}}
+{{- $loading := cond $isLead "eager" "lazy" -}}
+<figure>
+  {{- if $image -}}
+    {{- $small := $image.Resize "640x webp q75" -}}
+    {{- $medium := $image.Resize "960x webp q75" -}}
+    <img
+      src="{{ $small.RelPermalink }}"
+      srcset="{{ $small.RelPermalink }} 640w, {{ $medium.RelPermalink }} 960w, {{ $image.RelPermalink }} {{ $image.Width }}w"
+      sizes="(max-width: 70rem) 100vw, 56rem"
+      width="{{ $image.Width }}"
+      height="{{ $image.Height }}"
+      loading="{{ $loading }}"
+      {{- if $isLead }} fetchpriority="high"{{ end }}
+      decoding="async"
+      alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+  {{- else -}}
+    <img src="{{ $src | safeURL }}" loading="{{ $loading }}"{{ if $isLead }} fetchpriority="high"{{ end }} decoding="async" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }}>
+  {{- end -}}
+  {{- with .Title }}<figcaption>{{ . }}</figcaption>{{ end }}
+</figure>

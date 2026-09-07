@@ -1,0 +1,76 @@
+baseURL = 'https://example.org/'
+defaultContentLanguage = 'pt-br'
+locale = 'pt-BR'
+title = 'FoxTrope'
+enableRobotsTXT = true
+enableGitInfo = true
+summaryLength = 32
+
+[params]
+  description = 'Tecnologia, código e cultura nérdica para quem prefere criar, entender e ir fundo em vez de apenas consumir.'
+  author = 'FoxTechWorld'
+  footer = 'Criamos, exploramos, lemos, programamos e construímos — conhecimento por paixão, não por tendência.'
+  mainSections = ['posts']
+
+  [params.disqus]
+    shortname = ''
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+
+[outputs]
+  home = ['HTML', 'RSS']
+  section = ['HTML', 'RSS']
+  taxonomy = ['HTML', 'RSS']
+  term = ['HTML', 'RSS']
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+
+[menus]
+  [[menus.main]]
+    name = 'Início'
+    pageRef = '/'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Artigos'
+    pageRef = '/posts'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Tags'
+    pageRef = '/tags'
+    weight = 30
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = '0.146.0'
+
+  [[module.mounts]]
+    source = 'archetypes'
+    target = 'archetypes'
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    source = 'layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  [[module.mounts]]
+    source = 'node_modules/@fontsource-variable/source-sans-3/files'
+    target = 'assets/fonts/source-sans-3'

@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <div class="subpage">
+    <header class="page-header">
+      <p class="eyebrow">Taxonomia</p>
+      <h1 class="display-title">{{ .Title }}</h1>
+      {{ with .Content }}<div class="page-description">{{ . }}</div>{{ end }}
+    </header>
+    <ul class="terms__list">
+      {{ range .Data.Terms.Alphabetical }}
+        <li><a class="terms__link" href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }} ({{ .Count }})</a></li>
+      {{ else }}
+        <li>Nenhum termo publicado.</li>
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

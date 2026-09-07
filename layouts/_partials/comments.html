@@ -1,0 +1,4 @@
+{{- $enabled := .Params.comments | default false -}}
+{{- if $enabled }}
+  {{ partial "disqus-embed.html" (dict "page" .) }}
+{{- end }}

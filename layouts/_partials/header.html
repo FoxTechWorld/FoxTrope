@@ -1,0 +1,25 @@
+<header
+  class="site-header"
+  x-data="{ open: false }"
+  @click.outside="open = false"
+  @keydown.escape.window="open = false">
+  <div class="site-shell site-header__inner">
+    <a class="site-brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }} — página inicial">
+      {{ site.Title }}
+    </a>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Abrir menu"
+      :aria-label="open ? 'Fechar menu' : 'Abrir menu'"
+      :aria-expanded="open"
+      aria-controls="primary-navigation"
+      @click="open = !open">
+      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path x-show="!open" d="M4 7h16M4 12h16M4 17h16" />
+        <path x-show="open" x-cloak d="m6 6 12 12M18 6 6 18" />
+      </svg>
+    </button>
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </div>
+</header>

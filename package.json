@@ -1,0 +1,21 @@
+{
+  "name": "foxtrope",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A dark, editorial Hugo theme for FoxTechWorld.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/generated.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/main.css -o ./assets/css/generated.css --watch",
+    "build": "npm run build:css && hugo --minify",
+    "dev": "npm run watch:css"
+  },
+  "dependencies": {
+    "@fontsource-variable/source-sans-3": "^5.2.8",
+    "alpinejs": "^3.14.9",
+    "htmx.org": "^2.0.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "tailwindcss": "^4.1.11"
+  }
+}
