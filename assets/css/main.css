@@ -387,6 +387,55 @@
     @apply border-accent text-accent;
   }
 
+  .home-page > * + * {
+    @apply mt-12 border-t border-line pt-12 md:mt-16 md:pt-16;
+  }
+
+  .home-intro__lede {
+    @apply mt-5 max-w-[65ch] text-lg leading-relaxed text-muted;
+  }
+
+  .home-section-title {
+    @apply m-0 mb-6 text-[1.625rem] font-semibold leading-[1.2] tracking-[-0.015em] text-smoke md:text-[2rem];
+  }
+
+  .home-featured .post-card__title {
+    @apply text-[1.75rem] md:text-[2.5rem];
+  }
+
+  .home-axes__list,
+  .home-series__list {
+    @apply m-0 grid list-none grid-cols-1 gap-8 p-0 md:grid-cols-3;
+  }
+
+  .home-axes__title,
+  .home-series__title {
+    @apply m-0 text-lg font-semibold leading-tight text-smoke;
+  }
+
+  .home-axes__title a,
+  .home-series__title a {
+    @apply text-smoke no-underline;
+  }
+
+  .home-axes__title a:hover,
+  .home-series__title a:hover {
+    @apply text-accent;
+  }
+
+  .home-axes__description,
+  .home-series__description {
+    @apply mb-0 mt-2 text-muted;
+  }
+
+  .home-series__count {
+    @apply mb-0 mt-2 text-sm font-medium text-muted;
+  }
+
+  .home-subscribe__text {
+    @apply mb-6 mt-0 max-w-[65ch] text-muted;
+  }
+
   .comments {
     @apply mt-16 max-w-[70ch] border-t border-line pt-10;
   }

@@ -1,17 +1,79 @@
 {{ define "main" }}
   <div class="home-page">
+    <header class="home-intro">
+      <h1 class="display-title">{{ site.Title }}</h1>
+      {{ with site.Params.description }}<p class="home-intro__lede">{{ . }}</p>{{ end }}
+    </header>
+
     {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
-    {{ if $pages }}
+    {{ $sorted := $pages.ByDate.Reverse }}
+    {{ $featured := "" }}
+    {{ if gt (len $sorted) 0 }}{{ $featured = index $sorted 0 }}{{ end }}
+    {{ $recent := first 4 (after 1 $sorted) }}
+
+    {{ with $featured }}
+      <section class="home-featured" aria-labelledby="featured-heading">
+        <p class="eyebrow" id="featured-heading">Artigo principal</p>
+        {{ partial "post-card.html" . }}
+      </section>
+    {{ end }}
+
+    {{ if $recent }}
       <section aria-labelledby="recent-posts">
-        <h1 id="recent-posts" class="display-title mb-8">Artigos recentes</h1>
+        <h2 id="recent-posts" class="home-section-title">Artigos recentes</h2>
         <ol class="post-list">
-          {{ range first 3 $pages.ByDate.Reverse }}
-            <li class="post-list__item">{{ partial "post-card.html" . }}</li>
-          {{ end }}
+          {{ range $recent }}<li class="post-list__item">{{ partial "post-card.html" . }}</li>{{ end }}
         </ol>
       </section>
-    {{ else }}
+    {{ end }}
+
+    {{ if not $pages }}
       <p>Nenhum artigo publicado ainda.</p>
     {{ end }}
+
+    {{ $axes := slice
+      (dict "name" "Sistemas e Engenharia" "slug" "sistemas-e-engenharia" "description" "Kernels, compiladores, algoritmos e as decisões de arquitetura por trás deles.")
+      (dict "name" "Construção Independente" "slug" "construção-independente" "description" "O processo de desenvolver software sozinho: ferramentas, LLMs, decisões e erros pelo caminho.")
+      (dict "name" "Tecnologia e Cultura" "slug" "tecnologia-e-cultura" "description" "Software livre, autonomia digital, Slow Movement e análises técnicas ou filosóficas de cultura.")
+    }}
+    <section class="home-axes" aria-labelledby="editorial-axes">
+      <h2 id="editorial-axes" class="home-section-title">Eixos editoriais</h2>
+      <ul class="home-axes__list">
+        {{ range $axes }}
+          {{ $axis := . }}
+          {{ $term := site.GetPage (printf "/categories/%s" $axis.slug) }}
+          <li class="home-axes__item">
+            <h3 class="home-axes__title">
+              {{ with $term }}<a href="{{ .RelPermalink }}">{{ $axis.name }}</a>{{ else }}{{ $axis.name }}{{ end }}
+            </h3>
+            <p class="home-axes__description">{{ $axis.description }}</p>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+
+    {{ with site.Taxonomies.series }}
+      {{ $terms := .Alphabetical }}
+      {{ if $terms }}
+        <section class="home-series" aria-labelledby="ongoing-series">
+          <h2 id="ongoing-series" class="home-section-title">Séries em andamento</h2>
+          <ul class="home-series__list">
+            {{ range $terms }}
+              <li class="home-series__item">
+                <h3 class="home-series__title"><a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a></h3>
+                {{ with .Page.Description }}<p class="home-series__description">{{ . }}</p>{{ end }}
+                <p class="home-series__count">{{ .Count }} {{ if eq .Count 1 }}artigo{{ else }}artigos{{ end }}</p>
+              </li>
+            {{ end }}
+          </ul>
+        </section>
+      {{ end }}
+    {{ end }}
+
+    <section class="home-subscribe" aria-labelledby="subscribe-heading">
+      <h2 id="subscribe-heading" class="home-section-title">Assine</h2>
+      <p class="home-subscribe__text">Sem newsletter, sem cadastro. Só o feed.</p>
+      {{ with site.Home.OutputFormats.Get "RSS" }}<a class="button" href="{{ .Permalink }}">Assinar via RSS</a>{{ end }}
+    </section>
   </div>
 {{ end }}
